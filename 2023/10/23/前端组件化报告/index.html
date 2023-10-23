@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>前端通用组件化方案报告 - Wrh的博客</title><link rel="manifest" href="/wrh.github.io/manifest.json"><meta name="application-name" content="Wrh的博客"><meta name="msapplication-TileImage" content="/img/favicon.svg"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Wrh的博客"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="封侯非我意，但愿海波平。"><meta property="og:type" content="blog"><meta property="og:title" content="前端通用组件化方案报告"><meta property="og:url" content="https://smartwrh.github.io/wrh.github.io/2023/10/23/%E5%89%8D%E7%AB%AF%E7%BB%84%E4%BB%B6%E5%8C%96%E6%8A%A5%E5%91%8A/"><meta property="og:site_name" content="Wrh的博客"><meta property="og:description" content="封侯非我意，但愿海波平。"><meta property="og:locale" content="en_US"><meta property="og:image" content="https://smartwrh.github.io/wrh.github.io/img/dumi.png"><meta property="og:image" content="https://smartwrh.github.io/wrh.github.io/img/vite.png"><meta property="og:image" content="https://smartwrh.github.io/wrh.github.io/img/rspack.png"><meta property="og:image" content="https://smartwrh.github.io/wrh.github.io/img/turbo.png"><meta property="og:image" content="https://smartwrh.github.io/wrh.github.io/img/code.png"><meta property="og:image" content="https://smartwrh.github.io/wrh.github.io/img/zx.png"><meta property="article:published_time" content="2023-10-23T03:46:49.480Z"><meta property="article:modified_time" content="2023-10-23T03:49:36.040Z"><meta property="article:author" content="Wrh"><meta property="article:tag" content="前端"><meta property="twitter:card" content="summary"><meta property="twitter:image" content="/wrh.github.io/img/dumi.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://smartwrh.github.io/wrh.github.io/2023/10/23/%E5%89%8D%E7%AB%AF%E7%BB%84%E4%BB%B6%E5%8C%96%E6%8A%A5%E5%91%8A/"},"headline":"前端通用组件化方案报告","image":["https://smartwrh.github.io/wrh.github.io/img/dumi.png","https://smartwrh.github.io/wrh.github.io/img/vite.png","https://smartwrh.github.io/wrh.github.io/img/rspack.png","https://smartwrh.github.io/wrh.github.io/img/turbo.png","https://smartwrh.github.io/wrh.github.io/img/code.png","https://smartwrh.github.io/wrh.github.io/img/zx.png"],"datePublished":"2023-10-23T03:46:49.480Z","dateModified":"2023-10-23T03:49:36.040Z","author":{"@type":"Person","name":"Wrh"},"publisher":{"@type":"Organization","name":"Wrh的博客","logo":{"@type":"ImageObject","url":"https://smartwrh.github.io/img/logo.svg"}},"description":"引言随着Web技术的不断发展，前端开发已经进入了组件化时代。组件化开发可以提高开发效率，降低维护成本，使得前端代码更具有可重用性和可扩展性。本报告旨在探讨一种通用的前端组件化方案，以便适应不同的项目需求和技术栈。 需求分析随着项目增多发现现在多个项目中有一些重复的场景可以被封装为组件复用,也有一些重复的逻辑可以被封装为通用库,包括不限于:  不同项目的接口请求逻辑可以被复用 不同项目的异常处理逻辑"}</script><link rel="canonical" href="https://smartwrh.github.io/wrh.github.io/2023/10/23/%E5%89%8D%E7%AB%AF%E7%BB%84%E4%BB%B6%E5%8C%96%E6%8A%A5%E5%91%8A/"><link rel="icon" href="/wrh.github.io/img/favicon.svg"><link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.1.1/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/wrh.github.io/css/default.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><!--!--><!--!--><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css"><!--!--><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js"></script><!--!--><!--!--><meta name="generator" content="Hexo 6.2.0"></head><body class="is-3-column"><nav class="navbar navbar-main"><div class="container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/wrh.github.io/"><img src="/wrh.github.io/img/logo.svg" alt="Wrh的博客" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/wrh.github.io/">Home</a><a class="navbar-item" href="/wrh.github.io/archives">Archives</a><a class="navbar-item" href="/wrh.github.io/categories">Categories</a><a class="navbar-item" href="/wrh.github.io/tags">Tags</a><a class="navbar-item" href="/wrh.github.io/about">About</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/SmartWrh"><i class="fab fa-github"></i></a><a class="navbar-item is-hidden-tablet catalogue" title="Catalogue" href="javascript:;"><i class="fas fa-list-ul"></i></a><a class="navbar-item search" title="Search" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-9-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item">Posted&nbsp;<time dateTime="2023-10-23T03:46:49.480Z" title="2023/10/23 11:46:49">2023-10-23</time></span><span class="level-item">Updated&nbsp;<time dateTime="2023-10-23T03:49:36.040Z" title="2023/10/23 11:49:36">2023-10-23</time></span><span class="level-item"><a class="link-muted" href="/wrh.github.io/categories/%E5%85%AC%E5%8F%B8%E6%96%87%E6%A1%A3/">公司文档</a></span><span class="level-item">9 minutes read (About 1315 words)</span></div></div><h1 class="title is-3 is-size-4-mobile">前端通用组件化方案报告</h1><div class="content"><h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><p>随着Web技术的不断发展，前端开发已经进入了组件化时代。组件化开发可以提高开发效率，降低维护成本，使得前端代码更具有可重用性和可扩展性。本报告旨在探讨一种通用的前端组件化方案，以便适应不同的项目需求和技术栈。</p>
+<h2 id="需求分析"><a href="#需求分析" class="headerlink" title="需求分析"></a>需求分析</h2><p>随着项目增多发现现在多个项目中有一些重复的<strong>场景</strong>可以被封装为组件<strong>复用</strong>,也有一些重复的<strong>逻辑</strong>可以被封装为通用<strong>库</strong>,包括不限于:</p>
+<ul>
+<li>不同项目的接口请求逻辑可以被复用</li>
+<li>不同项目的异常处理逻辑可以被复用</li>
+<li>听力前后端和试卷网项目的视频播放组件</li>
+<li>听力前后端<strong>移动版</strong>和<strong>PC版</strong>音频播放组件</li>
+<li>不同项目的图片上传组件</li>
+<li>试卷网后台和蚂蚁云盘的<strong>批量上传</strong>逻辑</li>
+<li>通用的树结构数据处理逻辑</li>
+<li>…</li>
+</ul>
+<p>封装的通用组件目标:</p>
+<ol>
+<li>可供<code>React</code>、<code>微信小程序</code>场景接入</li>
+<li>满足逻辑封装和组合的需求，具备易用的编程模型，包括但不仅限于数据驱动视图、响应式数据、事件、生命周期、以及父子组件通信所需要的props和emit特性。</li>
+<li>具备Context API、状态管理、TS支持</li>
+</ol>
+<h2 id="方案"><a href="#方案" class="headerlink" title="方案"></a>方案</h2><p>考略到需要兼容<code>React</code>以及<code>微信小程序</code>同时<code>微信小程序</code>是使用<a target="_blank" rel="noopener" href="https://docs.taro.zone/docs/">taro</a>框架编写，封装的组件库应该使用<code>React</code>语言编写。</p>
+<p>除了代码语言外还应该考略的问题有以下几点:</p>
+<ol>
+<li>组件库本身如何快速迭代开发？</li>
+<li>前端项目如何方便简单的安装封装的组件库?</li>
+<li>开发人员如何快速的上手组件库，如何压平前端的上手学习曲线？</li>
+<li>如何不重复制造轮子？</li>
+</ol>
+<span id="more"></span>
+
+<p>结合公司实际情况以及目前市面上已有的方案有如下解决办法:</p>
+<blockquote>
+<p>组件库本身如何快速迭代开发？</p>
+</blockquote>
+<p>组件库本身也是作为一个<strong>项目</strong>来搭建的配合<code>gitlab</code>和一些开源方案如<code>dumi</code>、<code>VitePress</code>、<code>Rspack</code>就和开发普通的前端项目一样，迭代起来也是非常方便。<br><img src="/wrh.github.io/img/dumi.png" alt="dumi"><br><img src="/wrh.github.io/img/vite.png" alt="vite"><br><img src="/wrh.github.io/img/rspack.png" alt="rspack"></p>
+<blockquote>
+<p>前端项目如何方便简单的安装封装的组件库?</p>
+</blockquote>
+<p>考略到要支持<code>React</code>以及<code>微信小程序</code>代码必然要抹平平台间的差异，所以代码本身一定是需要对不同平台做出不同处理，如果还是按照平时的开发习惯可能会导致大量的耦合代码出现，应该采用类似现在流行的<code>Multi repo</code>方式开发，采用这种方式开发的知名项目有<code>react</code>和<code>Vue</code>等等，采用这种方式开发可以使用<code>Turbo repo</code>这个框架来加速编译的过程。<br><img src="/wrh.github.io/img/turbo.png" alt="turbo"></p>
+<blockquote>
+<p>开发人员如何快速的上手组件库，如何压平前端的上手学习曲线</p>
+</blockquote>
+<p>应该构建好完善的开发文档可以采用上述介绍过构建工具大致效果如下:</p>
+<p><img src="/wrh.github.io/img/code.png" alt="code"></p>
+<p><img src="/wrh.github.io/img/zx.png" alt="zx"></p>
+<p>上述效果是采用<code>dumi</code>完成</p>
+<blockquote>
+<p>如何不重复制造轮子？</p>
+</blockquote>
+<p>封装通用组件库的<strong>核心</strong>逻辑是在与节省开发过程中的部分<strong>重复</strong>工作量，并不是在于<strong>封装</strong>这一过程，如果已经有现成的解决方案如<code>ProTable</code>、<code>ProModal</code>等珠玉在前的方案开发过程中不应再过多封装这些场景。</p>
+<p>封装的<strong>组件</strong>本身应该做好<strong>封装</strong>,<strong>继承</strong>,<strong>多态</strong>,<strong>抽象</strong>,举一个例子</p>
+<p>上传图片的组件我们开发过程中不能只考虑<strong>上传</strong>的过程，应该同时考略到<strong>上传成功</strong>后的回调,<strong>上传失败</strong>的回调，<strong>上传验证</strong>的问题，以及<strong>批量上传</strong>，或者上传了<strong>文件类型</strong>等非图片格式。</p>
+<h2 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h2><p>一个事件有好处的同时必然也伴随着许多劣势，是否采用要在于取舍，封装通用组件库的劣势有如下几点</p>
+<ol>
+<li>组件库升级不方便，如上传图片最开始只支持一次性上传<strong>9</strong>张图片，现在有新需求期望支持更多的图片，需要先更新组件库代码并且打包发布，然后开发在升级该库才能完成需求。</li>
+<li>有沟通成本，A开发的组件库B在使用，B有新需求需要再和A沟通后由A打包发布B再验证代码。如果需求未完成还需继续沟通。</li>
+<li>有维护成本，目前没有专门维护组件库的人员，如果都参与到组件库的开发同时碰到自身有项目开发的时候必然导致维护成本增加</li>
+</ol>
+</div><div class="article-licensing box"><div class="licensing-title"><p>前端通用组件化方案报告</p><p><a href="https://smartwrh.github.io/wrh.github.io/2023/10/23/前端组件化报告/">https://smartwrh.github.io/wrh.github.io/2023/10/23/前端组件化报告/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>Author</h6><p>Wrh</p></div></div><div class="level-item is-narrow"><div><h6>Posted on</h6><p>2023-10-23</p></div></div><div class="level-item is-narrow"><div><h6>Updated on</h6><p>2023-10-23</p></div></div><div class="level-item is-narrow"><div><h6>Licensed under</h6><p><a class="icons" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="icon fab fa-creative-commons"></i></a><a class="icons" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="icon fab fa-creative-commons-by"></i></a><a class="icons" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="icon fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><div class="article-tags is-size-7 mb-4"><span class="mr-2">#</span><a class="link-muted mr-2" rel="tag" href="/wrh.github.io/tags/%E5%89%8D%E7%AB%AF/">前端</a></div><!--!--></article></div><!--!--><nav class="post-navigation mt-4 level is-mobile"><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/wrh.github.io/2023/09/11/Sentry%E5%BC%82%E5%B8%B8%E5%88%86%E7%B1%BB/"><span class="level-item">Sentry异常分类</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><!--!--></div><!--!--><div class="column column-right is-4-tablet is-4-desktop is-3-widescreen  order-3 is-sticky"><div class="card widget" id="toc" data-type="toc"><div class="card-content"><div class="menu"><h3 class="menu-label">Catalogue</h3><ul class="menu-list"><li><a class="level is-mobile" href="#引言"><span class="level-left"><span class="level-item">1</span><span class="level-item">引言</span></span></a></li><li><a class="level is-mobile" href="#需求分析"><span class="level-left"><span class="level-item">2</span><span class="level-item">需求分析</span></span></a></li><li><a class="level is-mobile" href="#方案"><span class="level-left"><span class="level-item">3</span><span class="level-item">方案</span></span></a></li><li><a class="level is-mobile" href="#缺点"><span class="level-left"><span class="level-item">4</span><span class="level-item">缺点</span></span></a></li></ul></div></div><style>#toc .menu-list > li > a.is-active + .menu-list { display: block; }#toc .menu-list > li > a + .menu-list { display: none; }</style><script src="/wrh.github.io/js/toc.js" defer></script></div></div></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/wrh.github.io/"><img src="/wrh.github.io/img/logo.svg" alt="Wrh的博客" height="28"></a><p class="is-size-7"><span>&copy; 2023 Wrh</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("en");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/wrh.github.io/js/column.js"></script><script src="/wrh.github.io/js/animation.js"></script><a id="back-to-top" title="Back to top" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/wrh.github.io/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.js" defer></script><script>window.addEventListener("load", () => {
+      window.cookieconsent.initialise({
+        type: "info",
+        theme: "edgeless",
+        static: false,
+        position: "bottom-left",
+        content: {
+          message: "This website uses cookies to improve your experience.",
+          dismiss: "Got it!",
+          allow: "Allow cookies",
+          deny: "Decline",
+          link: "Learn more",
+          policy: "Cookie Policy",
+          href: "https://www.cookiesandyou.com/",
+        },
+        palette: {
+          popup: {
+            background: "#edeff5",
+            text: "#838391"
+          },
+          button: {
+            background: "#4b81e8"
+          },
+        },
+      });
+    });</script><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><!--!--><!--!--><!--!--><script src="/wrh.github.io/js/main.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="Type something..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/wrh.github.io/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/wrh.github.io/content.json"}, {"hint":"Type something...","untitled":"(Untitled)","posts":"Posts","pages":"Pages","categories":"Categories","tags":"Tags"});
+        });</script></body></html>
